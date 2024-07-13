@@ -458,3 +458,79 @@ This Project contains database design and API documentation for a HNG task
         "message": "Failed to get user transactions"
     }
     ```
+
+#### Get User Notifications
+- **URL**: `/users/{usersId}/Notifications`
+- **Method**: `GET`
+- **Request**:
+- UserId required
+-
+- **Responses**:
+- **Status code**: 200
+- **Description**: `List of user notifications`
+    ```json
+    {
+        "status": "success",
+        "data": [
+            {
+                "id": 1,
+                "type": "email",
+                "message": "Your account has been created.",
+                "userId": 2,
+                "createdAt": "2024-07-13T21:59:43.945Z",
+                "updatedAt": "2024-07-13T21:59:43.945Z"
+            }
+        ]
+    }
+    ```
+- **Status code**: 400
+- **Description**:`Failed to get user notifications`
+    ```json
+    {
+        "status": "error",
+        "message": "Failed to get user notifications"
+    }
+    ```
+
+
+## Database Design
+
+### Entities
+
+1. Users
+
+- `id`: Interger Primary key
+- `first_name`: varchar
+- `last_name`: varchar
+- `email`: varchar
+- `email_verified`: boolean
+- `phone`: varchar
+- `phone_verified`: boolean
+- `password`: varchar
+- `created_at`: timestamp
+- `updated_at`: timestamp
+
+2. Organisations
+
+- `id`: integer Primary key
+- `name`: varchar(255)
+- `description`: text
+- `created_at`: timestamp
+- `updated_at`: timestamp
+
+3. Organisation_members
+
+- `user_id`: Integer Foreign key(users.id)
+- `organisation`: Integer Foreign key(Organisations.id)
+- `is_owner`: boolean
+- `created_at`: timestamp
+- `updated_at`: timestamp
+
+4. Blogs
+
+- `id`: Integer
+- `author_id`: integer foreign key(Users.id)
+- `title`: varchar
+- `content`: text
+- `created_at`: timestamp
+- `updated_at`: timestamp
